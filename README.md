@@ -15,4 +15,4 @@ Build and tested for Valheim_0.217.31.0 using BepInEx 5.4.22.0
 * Valheim_Data\Managed\assembly_valheim.dll
 * Valheim_Data\Managed\UnityEngine.dll
 * Valheim_Data\Managed\UnityEngine.CoreModule.dll
-* Valheim_Data\Managed\UnityEngine.UI.ddl
+* Valheim_Data\Managed\UnityEngine.UI.dll
