@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /*
+ * Valheim_0.217.31.0
  * [Message:   BepInEx] BepInEx 5.4.22.0 - Valheim (10.11.2023 21:18:15)
  * [Message:   BepInEx] User is running BepInExPack Valheim version 5.4.2202 from Thunderstore
  * [Info   :   BepInEx] Running under Unity v2022.3.12.5236448
