@@ -33,78 +33,79 @@ namespace ValheimAutoRepair
             {
                 Debug.Log($"We've opened an menu");
                 Player localPlayer = Player.m_localPlayer;
-				string localPlayerName = localPlayer.GetPlayerName();
+                string localPlayerName = localPlayer.GetPlayerName();
 
-                if(localPlayer.GetCurrentCraftingStation())
+                if (localPlayer.GetCurrentCraftingStation())
                 {
-					Debug.Log($"Player is at a crafting station");
+                    Debug.Log($"Player is at a crafting station");
 
-					List<ItemDrop.ItemData> tempWornItems = new List<ItemDrop.ItemData>();
+                    List<ItemDrop.ItemData> tempWornItems = new List<ItemDrop.ItemData>();
                     Player.m_localPlayer.GetInventory().GetWornItems(tempWornItems);
 
-					Debug.Log($"Checking for items to repair");
-					int itemsToRepair = 0;
+                    Debug.Log($"Checking for items to repair");
+                    int itemsToRepair = 0;
                     foreach (ItemDrop.ItemData tempWornItem in tempWornItems)
                     {
                         if (CanRepair(tempWornItem))
                         {
-							itemsToRepair++;
-						}
+                            itemsToRepair++;
+                        }
                     }
 
-					Debug.Log($"Items to repair: {itemsToRepair}");
-					for (int i = 0; i < itemsToRepair; i++)
+                    Debug.Log($"Items to repair: {itemsToRepair}");
+                    for (int i = 0; i < itemsToRepair; i++)
                     {
-						___m_repairButton.onClick.Invoke();
-					}
-					Debug.Log($"Repaired items");
-				} else
+                        ___m_repairButton.onClick.Invoke();
+                    }
+                    Debug.Log($"Repaired items");
+                }
+                else
                 {
-					Debug.Log($"Player not at a crafting station");
-				}
+                    Debug.Log($"Player not at a crafting station");
+                }
             }
 
-			/**
-			 * Copied from InventoryGui.CanRepair
-			 */
-			private static bool CanRepair(ItemDrop.ItemData item)
-			{
-				if (Player.m_localPlayer == null)
-				{
-					return false;
-				}
-				if (!item.m_shared.m_canBeReparied)
-				{
-					return false;
-				}
-				if (Player.m_localPlayer.NoCostCheat())
-				{
-					return true;
-				}
-				CraftingStation currentCraftingStation = Player.m_localPlayer.GetCurrentCraftingStation();
-				if (currentCraftingStation == null)
-				{
-					return false;
-				}
-				Recipe recipe = ObjectDB.instance.GetRecipe(item);
-				if (recipe == null)
-				{
-					return false;
-				}
-				if (recipe.m_craftingStation == null && recipe.m_repairStation == null)
-				{
-					return false;
-				}
-				if ((recipe.m_repairStation != null && recipe.m_repairStation.m_name == currentCraftingStation.m_name) || (recipe.m_craftingStation != null && recipe.m_craftingStation.m_name == currentCraftingStation.m_name) || item.m_worldLevel < Game.m_worldLevel)
-				{
-					if (Mathf.Min(currentCraftingStation.GetLevel(), 4) < recipe.m_minStationLevel)
-					{
-						return false;
-					}
-					return true;
-				}
-				return false;
-			}
-		}
+            /**
+             * Copied from InventoryGui.CanRepair
+             */
+            private static bool CanRepair(ItemDrop.ItemData item)
+            {
+                if (Player.m_localPlayer == null)
+                {
+                    return false;
+                }
+                if (!item.m_shared.m_canBeReparied)
+                {
+                    return false;
+                }
+                if (Player.m_localPlayer.NoCostCheat())
+                {
+                    return true;
+                }
+                CraftingStation currentCraftingStation = Player.m_localPlayer.GetCurrentCraftingStation();
+                if (currentCraftingStation == null)
+                {
+                    return false;
+                }
+                Recipe recipe = ObjectDB.instance.GetRecipe(item);
+                if (recipe == null)
+                {
+                    return false;
+                }
+                if (recipe.m_craftingStation == null && recipe.m_repairStation == null)
+                {
+                    return false;
+                }
+                if ((recipe.m_repairStation != null && recipe.m_repairStation.m_name == currentCraftingStation.m_name) || (recipe.m_craftingStation != null && recipe.m_craftingStation.m_name == currentCraftingStation.m_name) || item.m_worldLevel < Game.m_worldLevel)
+                {
+                    if (Mathf.Min(currentCraftingStation.GetLevel(), 4) < recipe.m_minStationLevel)
+                    {
+                        return false;
+                    }
+                    return true;
+                }
+                return false;
+            }
+        }
     }
 }
